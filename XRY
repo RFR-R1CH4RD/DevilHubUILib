@@ -881,9 +881,9 @@ function DevilHubLibrary:CreateWindow(Settings)
 	LoadingFrame.Subtitle.TextTransparency = 1
 	Main.Shadow.Image.ImageTransparency = 1
 	LoadingFrame.Version.TextTransparency = 1
-	LoadingFrame.Title.Text = Settings.LoadingTitle or "DevilHub Interface Suite"
+	LoadingFrame.Title.Text = Settings.LoadingTitle or "DevilHub"
 	LoadingFrame.Subtitle.Text = Settings.LoadingSubtitle or "by Sirius"
-	if Settings.LoadingTitle ~= "DevilHub Interface Suite" then
+	if Settings.LoadingTitle ~= "DevilHub" then
 		LoadingFrame.Version.Text = "DevilHub UI"
 	end
 	Topbar.Visible = false
