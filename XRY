@@ -21,43 +21,43 @@ local DevilHubLibrary = {
 	Flags = {},
 	Theme = {
 		Default = {
-			TextFont = "Default", -- Default will use the various font faces used across Rayfield
-			TextColor = Color3.fromRGB(240, 240, 240),
+			TextFont = "Default",
+                        TextColor = Color3.fromRGB(180, 180, 180),  -- Darker text color
 
-			Background = Color3.fromRGB(25, 25, 25),
-			Topbar = Color3.fromRGB(34, 34, 34),
-			Shadow = Color3.fromRGB(20, 20, 20),
+                        Background = Color3.fromRGB(15, 15, 15),    -- Darker background
+                        Topbar = Color3.fromRGB(20, 20, 20),        -- Darker topbar
+                        Shadow = Color3.fromRGB(10, 10, 10),        -- Darker shadow
 
-			NotificationBackground = Color3.fromRGB(20, 20, 20),
-			NotificationActionsBackground = Color3.fromRGB(230, 230, 230),
+                        NotificationBackground = Color3.fromRGB(15, 15, 15),
+                        NotificationActionsBackground = Color3.fromRGB(200, 200, 200),
 
-			TabBackground = Color3.fromRGB(80, 80, 80),
-			TabStroke = Color3.fromRGB(85, 85, 85),
-			TabBackgroundSelected = Color3.fromRGB(210, 210, 210),
-			TabTextColor = Color3.fromRGB(240, 240, 240),
-			SelectedTabTextColor = Color3.fromRGB(50, 50, 50),
+                        TabBackground = Color3.fromRGB(60, 60, 60),  -- Darker tab background
+                        TabStroke = Color3.fromRGB(65, 65, 65),      -- Darker tab stroke
+                        TabBackgroundSelected = Color3.fromRGB(160, 160, 160),  -- Darker selected tab background
+                        TabTextColor = Color3.fromRGB(180, 180, 180),  -- Darker tab text color
+                        SelectedTabTextColor = Color3.fromRGB(30, 30, 30),
 
-			ElementBackground = Color3.fromRGB(35, 35, 35),
-			ElementBackgroundHover = Color3.fromRGB(40, 40, 40),
-			SecondaryElementBackground = Color3.fromRGB(25, 25, 25), -- For labels and paragraphs
-			ElementStroke = Color3.fromRGB(50, 50, 50),
-			SecondaryElementStroke = Color3.fromRGB(40, 40, 40), -- For labels and paragraphs
+                        ElementBackground = Color3.fromRGB(25, 25, 25),  -- Darker element background
+                        ElementBackgroundHover = Color3.fromRGB(30, 30, 30),  -- Darker element background on hover
+                        SecondaryElementBackground = Color3.fromRGB(15, 15, 15),
+                        ElementStroke = Color3.fromRGB(40, 40, 40),
+                        SecondaryElementStroke = Color3.fromRGB(30, 30, 30),
 
-			SliderBackground = Color3.fromRGB(43, 105, 159),
-			SliderProgress = Color3.fromRGB(43, 105, 159),
-			SliderStroke = Color3.fromRGB(48, 119, 177),
+                        SliderBackground = Color3.fromRGB(33, 82, 126),  -- Darker slider background
+                        SliderProgress = Color3.fromRGB(33, 82, 126),   -- Darker slider progress
+                        SliderStroke = Color3.fromRGB(36, 89, 133),
 
-			ToggleBackground = Color3.fromRGB(30, 30, 30),
-			ToggleEnabled = Color3.fromRGB(0, 146, 214),
-			ToggleDisabled = Color3.fromRGB(100, 100, 100),
-			ToggleEnabledStroke = Color3.fromRGB(0, 170, 255),
-			ToggleDisabledStroke = Color3.fromRGB(125, 125, 125),
-			ToggleEnabledOuterStroke = Color3.fromRGB(100, 100, 100),
-			ToggleDisabledOuterStroke = Color3.fromRGB(65, 65, 65),
+                        ToggleBackground = Color3.fromRGB(20, 20, 20),  -- Darker toggle background
+                        ToggleEnabled = Color3.fromRGB(0, 102, 149),
+                        ToggleDisabled = Color3.fromRGB(80, 80, 80),   -- Darker disabled toggle
+                        ToggleEnabledStroke = Color3.fromRGB(0, 125, 187),
+                        ToggleDisabledStroke = Color3.fromRGB(100, 100, 100),
+                        ToggleEnabledOuterStroke = Color3.fromRGB(80, 80, 80),
+                        ToggleDisabledOuterStroke = Color3.fromRGB(45, 45, 45),
 
-			InputBackground = Color3.fromRGB(30, 30, 30),
-			InputStroke = Color3.fromRGB(65, 65, 65),
-			PlaceholderColor = Color3.fromRGB(178, 178, 178)
+                        InputBackground = Color3.fromRGB(20, 20, 20),   -- Darker input background
+                        InputStroke = Color3.fromRGB(45, 45, 45),
+                        PlaceholderColor = Color3.fromRGB(128, 128, 128)  -- Darker placeholder color
 		},
 		Light = {
 			TextFont = "Gotham", -- Default will use the various font faces used across Rayfield
