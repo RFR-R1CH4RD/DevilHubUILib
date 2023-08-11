@@ -547,7 +547,7 @@ function DevilHubLibrary:Notify(NotificationSettings)
 		if NotificationSettings.Image then
 			Notification.Icon.Image = "rbxassetid://"..tostring(NotificationSettings.Image) 
 		else
-			Notification.Icon.Image = "rbxassetid://8497487650"
+			Notification.Icon.Image = "rbxassetid://12416116403"
 		end
 
 		Notification.Icon.ImageTransparency = 1
@@ -874,7 +874,7 @@ end
 function DevilHubLibrary:CreateWindow(Settings)
 	local Passthrough = false
 	Topbar.Title.Text = Settings.Name
-	Main.Size = UDim2.new(0, 450, 0, 260)
+	Main.Size = UDim2.new(0, 370, 0, 260)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
 	LoadingFrame.Title.TextTransparency = 1
