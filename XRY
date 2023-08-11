@@ -874,7 +874,7 @@ end
 function DevilHubLibrary:CreateWindow(Settings)
 	local Passthrough = false
 	Topbar.Title.Text = Settings.Name
-	Main.Size = UDim2.new(0, 370, 0, 260)
+	Main.Size = UDim2.new(0, 470, 0, 220)
 	Main.Visible = true
 	Main.BackgroundTransparency = 1
 	LoadingFrame.Title.TextTransparency = 1
