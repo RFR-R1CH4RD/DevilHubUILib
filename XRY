@@ -44,8 +44,8 @@ local DevilHubLibrary = {
 			SecondaryElementStroke = Color3.fromRGB(27, 27, 27), -- For labels and paragraphs
 
 			SliderBackground = Color3.fromRGB(24, 24, 24),
-			SliderProgress = Color3.fromRGB(255, 255, 255),
-			SliderStroke = Color3.fromRGB(44, 44, 44),
+			SliderProgress = Color3.fromRGB(74, 74, 74),
+			SliderStroke = Color3.fromRGB(74, 74, 74),
 
 			ToggleBackground = Color3.fromRGB(30, 30, 30),
 			ToggleEnabled = Color3.fromRGB(255, 255, 255),
