@@ -22,25 +22,25 @@ local DevilHubLibrary = {
 	Theme = {
 		Default = {
 			TextFont = "Default", -- Default will use the various font faces used across DevilHub
-			TextColor = Color3.fromRGB(240, 240, 240),
+			TextColor = Color3.fromRGB(255, 255, 255),
 
 			Background = Color3.fromRGB(25, 25, 25),
 			Topbar = Color3.fromRGB(0, 0, 0),
-			Shadow = Color3.fromRGB(7, 7, 7),
+			Shadow = Color3.fromRGB(0, 0, 0),
 
-			NotificationBackground = Color3.fromRGB(7, 7, 7),
+			NotificationBackground = Color3.fromRGB(0, 0, 0),
 			NotificationActionsBackground = Color3.fromRGB(0, 0, 0),
 
 			TabBackground = Color3.fromRGB(0, 0, 0),
-			TabStroke = Color3.fromRGB(16, 3, 3),
+			TabStroke = Color3.fromRGB(17, 17, 17),
 			TabBackgroundSelected = Color3.fromRGB(210, 210, 210),
-			TabTextColor = Color3.fromRGB(240, 240, 240),
+			TabTextColor = Color3.fromRGB(255, 255, 255),
 			SelectedTabTextColor = Color3.fromRGB(50, 50, 50),
 
-			ElementBackground = Color3.fromRGB(24, 24, 24),
-			ElementBackgroundHover = Color3.fromRGB(40, 40, 40),
-			SecondaryElementBackground = Color3.fromRGB(25, 25, 25), -- For labels and paragraphs
-			ElementStroke = Color3.fromRGB(36, 36, 36),
+			ElementBackground = Color3.fromRGB(0, 0, 0),
+			ElementBackgroundHover = Color3.fromRGB(0, 0, 0),
+			SecondaryElementBackground = Color3.fromRGB(0, 0, 0), -- For labels and paragraphs
+			ElementStroke = Color3.fromRGB(17, 17, 17),
 			SecondaryElementStroke = Color3.fromRGB(27, 27, 27), -- For labels and paragraphs
 
 			SliderBackground = Color3.fromRGB(24, 24, 24),
@@ -52,7 +52,7 @@ local DevilHubLibrary = {
 			ToggleDisabled = Color3.fromRGB(40, 40, 40),
 			ToggleEnabledStroke = Color3.fromRGB(36, 36, 36),
 			ToggleDisabledStroke = Color3.fromRGB(44, 44, 44),
-			ToggleEnabledOuterStroke = Color3.fromRGB(24, 24, 24),
+			ToggleEnabledOuterStroke = Color3.fromRGB(27, 27, 27),
 			ToggleDisabledOuterStroke = Color3.fromRGB(27, 27, 27),
 
 			InputBackground = Color3.fromRGB(30, 30, 30),
