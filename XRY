@@ -219,7 +219,7 @@ local function AddDraggingFunctionality(DragPoint, Main)
     end
 
     local function onInputBegan(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
             dragStart = input.Position
             startPosition = Main.Position
@@ -229,9 +229,6 @@ local function AddDraggingFunctionality(DragPoint, Main)
                     dragging = false
                 end
             end)
-        elseif input.UserInputType == Enum.UserInputType.Touch then
-            dragStart = input.Position
-            startPosition = Main.Position
         end
     end
 
@@ -242,7 +239,7 @@ local function AddDraggingFunctionality(DragPoint, Main)
     end
 
     local function onInputEnded(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
             dragging = false
         end
     end
@@ -251,6 +248,7 @@ local function AddDraggingFunctionality(DragPoint, Main)
     UserInputService.InputChanged:Connect(onInputChanged)
     UserInputService.InputEnded:Connect(onInputEnded)
 end
+
 
 
 
