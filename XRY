@@ -229,49 +229,27 @@ local function AddDraggingFunctionality(DragPoint, Main)
                     dragging = false
                 end
             end)
-        end
-    end
-
-    local function onInputChanged(input)
-        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
-            updateDrag(input)
-        end
-    end
-
-    local function onInputEnded(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            dragging = false
-        end
-    end
-
-    local function onTouchStart(input)
-        if not dragging then
+        elseif input.UserInputType == Enum.UserInputType.Touch then
             dragStart = input.Position
             startPosition = Main.Position
         end
     end
 
-    local function onTouchMove(input)
-        if not dragging then
-            local delta = input.Position - dragStart
-            Main.Position = UDim2.new(
-                startPosition.X.Scale, startPosition.X.Offset + delta.X,
-                startPosition.Y.Scale, startPosition.Y.Offset + delta.Y
-            )
+    local function onInputChanged(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            updateDrag(input)
         end
     end
 
-    local function onTouchEnd(input)
-        dragStart = nil
+    local function onInputEnded(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+        end
     end
 
     DragPoint.InputBegan:Connect(onInputBegan)
     UserInputService.InputChanged:Connect(onInputChanged)
     UserInputService.InputEnded:Connect(onInputEnded)
-
-    Main.InputBegan:Connect(onTouchStart)
-    Main.InputChanged:Connect(onTouchMove)
-    Main.InputEnded:Connect(onTouchEnd)
 end
 
 
