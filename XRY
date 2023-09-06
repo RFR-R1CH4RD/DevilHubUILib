@@ -203,54 +203,39 @@ function ChangeTheme(ThemeName)
 end
 
 local function AddDraggingFunctionality(DragPoint, Main)
-    pcall(function()
-        local Dragging, DragInput, StartPos, StartOffset = false
-        local UserInputService = game:GetService("UserInputService")
-        local TweenService = game:GetService("TweenService")
+    local UserInputService = game:GetService("UserInputService")
+    local TweenService = game:GetService("TweenService")
 
-        -- Függvény az ablak pozíciójának frissítéséhez
-        local function UpdateDrag(Input)
-            local Delta = Input.Position - StartPos
-            Main.Position = UDim2.new(StartOffset.X.Scale, StartOffset.X.Offset + Delta.X, StartOffset.Y.Scale, StartOffset.Y.Offset + Delta.Y)
+    local dragging = false
+    local dragStart = nil
+
+    local function updateDrag(input)
+        local delta = input.Position - dragStart
+        Main.Position = UDim2.new(
+            0, Main.Position.X.Offset + delta.X,
+            0, Main.Position.Y.Offset + delta.Y
+        )
+    end
+
+    DragPoint.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
         end
+    end)
 
-        DragPoint.InputBegan:Connect(function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-                Dragging = true
-                StartPos = Input.Position
-                StartOffset = Main.Position
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            updateDrag(input)
+        end
+    end)
 
-                Input.Changed:Connect(function()
-                    if Input.UserInputState == Enum.UserInputState.End then
-                        Dragging = false
-                    end
-                end)
-            elseif UserInputService.TouchEnabled and Input.UserInputType == Enum.UserInputType.Touch then
-                -- Érintéses húzhatóság mobil eszközökön
-                Dragging = true
-                StartPos = Input.Position
-                StartOffset = Main.Position
-            end
-        end)
-
-        UserInputService.InputChanged:Connect(function(Input)
-            if Dragging then
-                if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
-                    UpdateDrag(Input)
-                end
-            end
-        end)
-
-        UserInputService.InputEnded:Connect(function(Input)
-            if Dragging then
-                if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
-                    Dragging = false
-                end
-            end
-        end)
+    UserInputService.InputEnded:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+            dragging = false
+        end
     end)
 end
-
 
 
 
