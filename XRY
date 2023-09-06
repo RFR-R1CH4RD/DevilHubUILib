@@ -205,32 +205,37 @@ end
 local function AddDraggingFunctionality(DragPoint, Main)
     local UserInputService = game:GetService("UserInputService")
     local TweenService = game:GetService("TweenService")
-
+    
     local dragging = false
-    local startPos
-    local startOffset
-
+    local dragStart = nil
+    
+    local function updateDrag(input)
+        local delta = input.Position - dragStart
+        Main.Position = UDim2.new(0, dragStart.X + delta.X, 0, dragStart.Y + delta.Y)
+    end
+    
     DragPoint.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
-            startPos = input.Position
-            startOffset = Main.Position - UDim2.new(0, startPos.X, 0, startPos.Y)
+            dragStart = input.Position
+            input.UserInputState = Enum.UserInputState.Begin
+            updateDrag(input)
         end
     end)
-
+    
     UserInputService.InputChanged:Connect(function(input)
         if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-            local delta = input.Position - startPos
-            Main.Position = UDim2.new(0, startPos.X + delta.X, 0, startPos.Y + delta.Y)
+            updateDrag(input)
         end
     end)
-
+    
     UserInputService.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
             dragging = false
         end
     end)
 end
+
 
 local function PackColor(Color)
 	return {R = Color.R * 255, G = Color.G * 255, B = Color.B * 255}
