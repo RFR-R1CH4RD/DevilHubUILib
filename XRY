@@ -9,7 +9,7 @@
 
 
 
-local Release = "v0.57"
+local Release = "v0.59"
 local NotificationDuration = 10
 local DevilHubFolder = "DevilHub"
 local ConfigurationFolder = DevilHubFolder.."/Configurations"
