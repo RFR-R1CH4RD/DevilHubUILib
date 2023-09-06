@@ -218,7 +218,7 @@ local function AddDraggingFunctionality(DragPoint, Main)
         )
     end
 
-    DragPoint.InputBegan:Connect(function(input)
+    local function onInputBegan(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             dragging = true
             dragStart = input.Position
@@ -230,38 +230,48 @@ local function AddDraggingFunctionality(DragPoint, Main)
                 end
             end)
         end
-    end)
+    end
 
-    UserInputService.InputChanged:Connect(function(input)
+    local function onInputChanged(input)
         if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
             updateDrag(input)
         end
-    end)
+    end
 
-
-    local touchStart = nil
-
-    Main.InputBegan:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch and not dragging then
-            touchStart = input.Position
+    local function onInputEnded(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = false
         end
-    end)
+    end
 
-    Main.InputChanged:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch and not dragging and touchStart then
-            local delta = input.Position - touchStart
+    local function onTouchStart(input)
+        if not dragging then
+            dragStart = input.Position
+            startPosition = Main.Position
+        end
+    end
+
+    local function onTouchMove(input)
+        if not dragging then
+            local delta = input.Position - dragStart
             Main.Position = UDim2.new(
                 startPosition.X.Scale, startPosition.X.Offset + delta.X,
                 startPosition.Y.Scale, startPosition.Y.Offset + delta.Y
             )
         end
-    end)
+    end
 
-    Main.InputEnded:Connect(function(input)
-        if input.UserInputType == Enum.UserInputType.Touch then
-            touchStart = nil
-        end
-    end)
+    local function onTouchEnd(input)
+        dragStart = nil
+    end
+
+    DragPoint.InputBegan:Connect(onInputBegan)
+    UserInputService.InputChanged:Connect(onInputChanged)
+    UserInputService.InputEnded:Connect(onInputEnded)
+
+    Main.InputBegan:Connect(onTouchStart)
+    Main.InputChanged:Connect(onTouchMove)
+    Main.InputEnded:Connect(onTouchEnd)
 end
 
 
