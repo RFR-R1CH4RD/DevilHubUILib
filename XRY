@@ -203,57 +203,67 @@ function ChangeTheme(ThemeName)
 end
 
 local function AddDraggingFunctionality(DragPoint, Main)
-    pcall(function()
-        local Dragging, DragInput, MousePos, FramePos = false
-        local UserInputService = game:GetService("UserInputService")
-        local TweenService = game:GetService("TweenService")
+    local UserInputService = game:GetService("UserInputService")
+    local TweenService = game:GetService("TweenService")
 
-        DragPoint.InputBegan:Connect(function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-                Dragging = true
-                MousePos = Input.Position
-                FramePos = Main.Position
+    local dragging = false
+    local dragStart = nil
+    local startPosition = nil
 
-                Input.Changed:Connect(function()
-                    if Input.UserInputState == Enum.UserInputState.End then
-                        Dragging = false
-                    end
-                end)
-            end
-        end)
+    local function updateDrag(input)
+        local delta = input.Position - dragStart
+        Main.Position = UDim2.new(
+            startPosition.X.Scale, startPosition.X.Offset + delta.X,
+            startPosition.Y.Scale, startPosition.Y.Offset + delta.Y
+        )
+    end
 
-        DragPoint.InputChanged:Connect(function(Input)
-            if Input.UserInputType == Enum.UserInputType.MouseMovement then
-                DragInput = Input
-            end
-        end)
+    DragPoint.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 then
+            dragging = true
+            dragStart = input.Position
+            startPosition = Main.Position
 
-        UserInputService.InputChanged:Connect(function(Input)
-            if Input == DragInput and Dragging then
-                local Delta = Input.Position - MousePos
-                Main.Position = UDim2.new(FramePos.X.Scale, FramePos.X.Offset + Delta.X, FramePos.Y.Scale, FramePos.Y.Offset + Delta.Y)
-            end
-        end)
-
-        if UserInputService.TouchEnabled then
-            local touchInput
-
-            DragPoint.TouchStarted:Connect(function(Input, GameProcessedEvent)
-                touchInput = Input
-                GameProcessedEvent:Connect(function()
-                    touchInput = nil
-                end)
-            end)
-
-            UserInputService.TouchMoved:Connect(function(Input)
-                if touchInput == Input then
-                    local Delta = Input.Position - touchInput.Position
-                    Main.Position = UDim2.new(FramePos.X.Scale, FramePos.X.Offset + Delta.X, FramePos.Y.Scale, FramePos.Y.Offset + Delta.Y)
+            input.Changed:Connect(function()
+                if input.UserInputState == Enum.UserInputState.End then
+                    dragging = false
                 end
             end)
         end
     end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+            updateDrag(input)
+        end
+    end)
+
+    if UserInputService.TouchEnabled then
+        local touchInput = nil
+
+        DragPoint.TouchStarted:Connect(function(input, gameProcessed)
+            if not gameProcessed then
+                dragging = true
+                touchInput = input
+                dragStart = input.Position
+                startPosition = Main.Position
+            end
+        end)
+
+        UserInputService.TouchMoved:Connect(function(input)
+            if touchInput == input and dragging then
+                updateDrag(input)
+            end
+        end)
+
+        UserInputService.TouchEnded:Connect(function(input)
+            if touchInput == input then
+                dragging = false
+            end
+        end)
+    end
 end
+
 
 
 
